@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   </head>
   <body>
@@ -96,7 +97,36 @@
                 </div>
               </div>
             </section>
-          
+            <h3>Lista  de produtos</h3>  
+
+            <input class="form-control" name="q" id="busca-produtos" 
+            hx-trigger="keyup delay:400ms" hx-target="#dados-produtos" 
+            hx-get="https://dummyjson.com/products/search" type="text" 
+            placeholder="O que você procura?" >
+       
+             <table class="table" hx-indicator="#loading" id="busca-produtos" hx-target="#dados-produtos" hx-trigger="load" hx-get="https://dummyjson.com/products">
+                 
+               <thead class="table-dark">
+                 <tr>
+                   <th scope="col"></th>
+                   <th scope="col">ID</th>
+                   <th scope="col">Titulo</th>
+                   <th scope="col">Preço</th>
+                   <th scope="col">Ações</th>
+                 </tr>
+               </thead>
+               <tbody id="dados-produtos">
+       
+               </tbody>
+             </table>
+       
+             <div class="row justify-content-center">
+               <div class="col-auto">
+                 <span id="loading" class="htmx-indicator">
+                   <img src="loading.gif" width="50" alt="">
+                 </span>
+               </div>
+             </div>
       <!-- Page Footer-->
       <footer class="section footer-minimal context-dark">
         <div class="container wow-outer">
@@ -130,5 +160,6 @@
     <div class="snackbars" id="form-output-global"></div>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/h.js"></script>
   </body>
 </html>

@@ -1,59 +1,19 @@
-document.addEventListener("htmx:afterRequest", function(event){
+function displayMenu(data) {
+    const menuList = document.getElementById('menuList');
+    menuList.innerHTML = ''; // Limpar a lista antes de adicionar novos itens
 
-if(event.target.id === 'busca-pratos'){
-    console.log(event.detail.xhr);
+    data.menu.pratos_principais.forEach(item => {
+        // Criar elemento li para cada item do menu
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item.nome} - R$ ${item.preco.toFixed(2)}`;
+        menuList.appendChild(listItem);
+    });
+}
 
-    const response = JSON.parse(event.detail.xhr.responseText)
-    const produtosDiv = document.querySelector("#dados-pratos");
-
-    let htmlDiv = "";
-    let style = "";
-    let indice = 0;
-    let preco = 0;
-
-    response.pratos_principais.forEach(Menu => {
-        style = indice%2==0 ? 'table-secondary' : ''
-        
-        preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(Menu.price);
-        
-        htmlDiv += `
-        <tr class="${style}">
-         <td class="col-1"><img src="${Menu.url}" width="100" class="img-thumbnail"></td>
-         <td class="col-1">${Menu.id}</td>
-         <td class="col-8"><strong>${Menu.nome}</strong><br>${Menu.descricao}</td>
-         <td class="col-1">${preco}</td>
-         <td class="col-1"><a href="#"><i style="color:red; font-size:20px" class="bi bi-trash-fill"></i></a></td>
-        </tr>
-        `
-        indice++
-    })
-
-    produtosDiv.innerHTML = htmlDiv
-}else if(event.target.id === 'busca-produtos-grid'){
-        console.log(event.detail.xhr);
-    
-        const response = JSON.parse(event.detail.xhr.responseText)
-        const produtosDiv = document.querySelector("#dados-produtos-grid");
-    
-        let htmlDiv = "";
-        let preco = 0;
-    
-        response.products.forEach(produto => {
-            
-            preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(produto.price);
-            
-            htmlDiv += `
-          
-              <div class="col-md-3 col-6 border border-danger my-1 mx-0">
-               <img src="${produto.thumbnail}" class="img-fluid">
-               <div><strong> ${produto.title}</strong></div>
-              </div>
-       
-            `
-      
-        })
-    
-        produtosDiv.innerHTML = htmlDiv
+// Evento de finalização de carregamento HTMX para exibir os dados do menu e esconder o indicador de carregamento
+document.addEventListener('htmx:loadend', function(event) {
+    if (event.detail.elt.id === 'menuList') {
+        displayMenu(event.detail.xhr.response);
+        document.getElementById('loading').style.display = 'none';
     }
-
 });

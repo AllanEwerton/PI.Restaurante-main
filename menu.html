@@ -15,6 +15,24 @@
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
 
     <style>
+.ll {
+    font-size: 36px; /* Aumenta o tamanho da fonte do título */
+    color: #51ff00; /* Define a cor do texto do título */
+    background-color: #333; /* Define uma cor de fundo para o título */
+    padding: 20px; /* Adiciona espaçamento interno ao redor do título */
+    border-radius: 10px; /* Adiciona borda arredondada ao título */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona sombreado ao título */
+    margin-bottom: 30px; /* Adiciona espaço abaixo do título */
+}
+
+/* Estilos para a linha divisória */
+.divider {
+            border: none; /* Remove a borda padrão */
+            height: 1px; /* Define a altura da linha */
+            background-color: #ccc; /* Define a cor de fundo da linha */
+            margin-bottom: 30px; /* Adiciona espaço abaixo da linha */
+        }
+
         #menuList {
     margin: 20px; /* Adicione a margem desejada */
 }
@@ -22,9 +40,9 @@
 .prato {
     display: flex;
     flex-direction: column; /* Define a direção da flexbox como coluna */
-    margin-bottom: 20px; /* Adiciona espaçamento entre as divs dos pratos */
+    margin-bottom: 30px; /* Aumenta o espaçamento entre as divs dos pratos */
     border-radius: 10px; /* Adiciona borda arredondada */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona sombreado */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Adiciona sombreado */
 }
 
 .prato-imagem {
@@ -39,11 +57,16 @@
     padding: 20px; /* Adiciona espaçamento interno dentro da div do prato */
     border-bottom-left-radius: 10px; /* Adiciona borda arredondada apenas no canto inferior esquerdo */
     border-bottom-right-radius: 10px; /* Adiciona borda arredondada apenas no canto inferior direito */
+    background-color: #f9f9f9; /* Define a cor de fundo para a área do título */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adiciona sombreado */
 }
 
 .prato-info h4 {
     font-size: 24px; /* Aumenta o tamanho do título */
     margin-bottom: 10px; /* Adiciona espaço abaixo do título */
+    background-color: #ff9100; /* Define um fundo diferente para o título */
+    color: #fff; /* Define a cor do texto do título como branco */
+    padding: 10px; /* Adiciona espaçamento interno ao redor do título */
 }
 
 .prato-info p {
@@ -51,26 +74,30 @@
     margin-bottom: 10px; /* Adiciona espaço abaixo do texto */
 }
 
-
 .prato-info p.preco {
     font-weight: bold; /* Adiciona negrito ao preço */
     color: green; /* Define a cor do preço como verde */
 }
+
 /* Estilos para organizar as divs dos pratos em múltiplas colunas em telas maiores */
 @media (min-width: 768px) {
-    .prato-lista {
-        display: flex;
-        flex-wrap: wrap; /* Permite que as divs dos pratos quebrem para a próxima linha */
-        justify-content: space-between; /* Distribui as divs igualmente ao longo do espaço disponível */
-    }
+   /* Estilos para a lista de pratos */
+   .prato-lista {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 0 -10px; /* Adiciona margem negativa para compensar a margem interna das divs dos pratos */
+        }
 
-    .prato {
-        width: calc(50% - 20px); /* Define a largura das divs dos pratos para ocupar metade da largura do contêiner pai */
-        margin-bottom: 20px; /* Reduz o espaçamento entre os pratos */
-    }
-}
-
-
+        /* Estilos para cada prato */
+        .prato {
+            width: calc(50% - 20px); /* Calcula a largura para ocupar metade da tela com margens laterais de 10px */
+            margin: 0 10px 20px; /* Adiciona margem interna */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
     </style>
 </head>
 <body>
@@ -139,9 +166,10 @@
                 <div class="row justify-content-center text-center">
                     <div class="col-md-9 col-lg-7 wow-outer">
                         <div class="wow slideInDown">
-                            <h3>Lista de pratos</h3>
+                            <h2 class="ll">Lista de pratos</h2>
+                            <!-- Linha divisória -->
+                            <hr class="divider">
                             <!-- Lista de pratos -->
-                           
                             <div class="row justify-content-center">
                                 <div class="col-auto">
                                     <!-- Indicador de carregamento -->
@@ -160,7 +188,7 @@
         <section id="menuList" class="prato-lista" hx-trigger="load" hx-get="http://localhost:3000/Menu">
             <!-- Os itens do menu serão adicionados aqui via HTMX -->
         </section>
-        
+        </div>
         <!-- Page Footer-->
         <footer class="section footer-minimal context-dark">
             <div class="container wow-outer">

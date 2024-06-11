@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/style.css">
+    
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
   </head>
@@ -85,10 +86,8 @@
         <section class="section-transform-top">
             <div class="container">
                 <div class="box-booking">
-                    <form class="rd-form rd-mailform booking-form">
-                        <div class="menu">
-                            <input id="searchInput" type="text" name="pesquisar" placeholder="Pesquisar menu" hx-trigger="keyup changed delay:500ms" hx-get="http://localhost:3000/Menu" hx-target="#menuList">
-                        </div>
+                
+                  
                     </form>
                 </div>
             </div>
@@ -96,7 +95,7 @@
 
         <h3>Lista de pratos</h3>
         <!-- Lista de pratos -->
-        <ul id="menuList" hx-target="#menuList">
+        <ul hx-trigger="load" hx-get="http://localhost:3000/Menu" id="menuList" >
             <!-- Os itens do menu serão adicionados aqui via HTMX -->
         </ul>
 
@@ -104,7 +103,9 @@
             <div class="col-auto">
                 <!-- Indicador de carregamento -->
                 <span id="loading" class="htmx-indicator" style="display: none;">
-                    <img src="loading.gif" width="50" alt="Loading...">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
                 </span>
             </div>
         </div>

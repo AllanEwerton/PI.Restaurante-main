@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="pt-br"> 
-  <head>
+<head>
     <title>Menu</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
@@ -13,137 +13,186 @@
     
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <style>.ie-panel{display: none;background: #212121;padding: 10px 0;box-shadow: 3px 3px 5px 0 rgba(0,0,0,.3);clear: both;text-align:center;position: relative;z-index: 1;} html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {display: block;}</style>
-  </head>
-  <body>
+
+    <style>
+        #menuList {
+    margin: 20px; /* Adicione a margem desejada */
+}
+/* Estilos para os pratos */
+.prato {
+    display: flex;
+    flex-direction: column; /* Define a direção da flexbox como coluna */
+    margin-bottom: 20px; /* Adiciona espaçamento entre as divs dos pratos */
+    border-radius: 10px; /* Adiciona borda arredondada */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona sombreado */
+}
+
+.prato-imagem {
+    width: 100%; /* Ajusta a largura da imagem para ocupar toda a largura da div */
+    height: auto; /* Mantém a proporção da imagem */
+    border-top-left-radius: 10px; /* Adiciona borda arredondada apenas no canto superior esquerdo */
+    border-top-right-radius: 10px; /* Adiciona borda arredondada apenas no canto superior direito */
+}
+
+.prato-info {
+    flex-grow: 1;
+    padding: 20px; /* Adiciona espaçamento interno dentro da div do prato */
+    border-bottom-left-radius: 10px; /* Adiciona borda arredondada apenas no canto inferior esquerdo */
+    border-bottom-right-radius: 10px; /* Adiciona borda arredondada apenas no canto inferior direito */
+}
+
+.prato-info h4 {
+    font-size: 24px; /* Aumenta o tamanho do título */
+    margin-bottom: 10px; /* Adiciona espaço abaixo do título */
+}
+
+.prato-info p {
+    font-size: 18px; /* Aumenta o tamanho do texto */
+    margin-bottom: 10px; /* Adiciona espaço abaixo do texto */
+}
+
+
+.prato-info p.preco {
+    font-weight: bold; /* Adiciona negrito ao preço */
+    color: green; /* Define a cor do preço como verde */
+}
+/* Estilos para organizar as divs dos pratos em múltiplas colunas em telas maiores */
+@media (min-width: 768px) {
+    .prato-lista {
+        display: flex;
+        flex-wrap: wrap; /* Permite que as divs dos pratos quebrem para a próxima linha */
+        justify-content: space-between; /* Distribui as divs igualmente ao longo do espaço disponível */
+    }
+
+    .prato {
+        width: calc(50% - 20px); /* Define a largura das divs dos pratos para ocupar metade da largura do contêiner pai */
+        margin-bottom: 20px; /* Reduz o espaçamento entre os pratos */
+    }
+}
+
+
+    </style>
+</head>
+<body>
     <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     <div class="preloader">
-      <div class="preloader-body">
-        <div class="cssload-container">
-          <div class="cssload-speeding-wheel"></div>
+        <div class="preloader-body">
+            <div class="cssload-container">
+                <div class="cssload-speeding-wheel"></div>
+            </div>
+            <p>Carregando...</p>
         </div>
-        <p>Carregando...</p>
-      </div>
     </div>
     <div class="page">
-      <!-- Page Header-->
-      <header class="section page-header">
-        <!-- RD Navbar-->
-        <div class="rd-navbar-wrap">
-          <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
-            <div class="rd-navbar-main-outer">
-              <div class="rd-navbar-main">
-                <!-- RD Navbar Panel-->
-                <div class="rd-navbar-panel"> 
-                  <!-- RD Navbar Toggle-->
-                  <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
-                  <!-- RD Navbar Brand-->
-                  <div class="rd-navbar-brand"></div>
-                </div>
-                <div class="rd-navbar-main-element">
-                  <div class="rd-navbar-nav-wrap">
-                    <!-- RD Navbar Nav-->
-                    <ul class="rd-navbar-nav">
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Home</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">Sobre</a>
-                      </li>
-                      <li class="rd-nav-item active"><a class="rd-nav-link" href="menu.html">Menu</a>
-                      </li>
-                      <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contatatos</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+        <!-- Page Header-->
+        <header class="section page-header">
+            <!-- RD Navbar-->
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                    <div class="rd-navbar-main-outer">
+                        <div class="rd-navbar-main">
+                            <!-- RD Navbar Panel-->
+                            <div class="rd-navbar-panel"> 
+                                <!-- RD Navbar Toggle-->
+                                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                                <!-- RD Navbar Brand-->
+                                <div class="rd-navbar-brand"></div>
+                            </div>
+                            <div class="rd-navbar-main-element">
+                                <div class="rd-navbar-nav-wrap">
+                                    <!-- RD Navbar Nav-->
+                                    <ul class="rd-navbar-nav">
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Home</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">Sobre</a>
+                                        </li>
+                                        <li class="rd-nav-item active"><a class="rd-nav-link" href="menu.html">Menu</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contatos</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
             </div>
-          </nav>
-        </div>
-      </header>
-      <section class="parallax-container overlay-1" data-parallax-img="images/breadcrumbs.jpg">
-        <div class="parallax-content breadcrumbs-custom context-dark"> 
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-12 col-lg-9">
-                <h2 class="breadcrumbs-custom-title">Menu</h2>
-                <ul class="breadcrumbs-custom-path">
-                  <li><a href="index.html">Home</a></li>
-                  <li class="active">Menu</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Base typography -->
-      <section class="section section-lg bg-default">
-        <div class="container">
-          <div class="row justify-content-center text-center">
-            <div class="col-md-9 col-lg-7 wow-outer">
-              <div class="wow slideInDown">
-
-                <h2>Pratos em Destaque</h2>
-    <section class="section section-lg bg-default">
-        <section class="section-transform-top">
-            <div class="container">
-                <div class="box-booking">
-                
-                  
-                    </form>
+        </header>
+        <section class="parallax-container overlay-1" data-parallax-img="images/breadcrumbs.jpg">
+            <div class="parallax-content breadcrumbs-custom context-dark"> 
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-lg-9">
+                            <h2 class="breadcrumbs-custom-title">Menu</h2>
+                            <ul class="breadcrumbs-custom-path">
+                                <li><a href="index.html">Home</a></li>
+                                <li class="active">Menu</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <h3>Lista de pratos</h3>
-        <!-- Lista de pratos -->
-        <ul hx-trigger="load" hx-get="http://localhost:3000/Menu" id="menuList" >
+        <!-- Base typography -->
+        <section class="section section-lg bg-default">
+            <div class="container">
+                <div class="row justify-content-center text-center">
+                    <div class="col-md-9 col-lg-7 wow-outer">
+                        <div class="wow slideInDown">
+                            <h3>Lista de pratos</h3>
+                            <!-- Lista de pratos -->
+                           
+                            <div class="row justify-content-center">
+                                <div class="col-auto">
+                                    <!-- Indicador de carregamento -->
+                                    <span id="loading" class="htmx-indicator" style="display: none;">
+                                        <div class="spinner-border" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="menuList" class="prato-lista" hx-trigger="load" hx-get="http://localhost:3000/Menu">
             <!-- Os itens do menu serão adicionados aqui via HTMX -->
-        </ul>
-
-        <div class="row justify-content-center">
-            <div class="col-auto">
-                <!-- Indicador de carregamento -->
-                <span id="loading" class="htmx-indicator" style="display: none;">
-                  <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                  </div>
-                </span>
+        </section>
+        
+        <!-- Page Footer-->
+        <footer class="section footer-minimal context-dark">
+            <div class="container wow-outer">
+                <div class="wow fadeIn">
+                    <div class="row row-60">
+                        <div class="col-12"></div>
+                        <div class="col-12">
+                            <ul class="footer-minimal-nav">
+                                <li><a href="#">Menu</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="contacts.html">Contatos</a></li>
+                                <li><a href="#">Galeria</a></li>
+                                <li><a href="about-us.html">Sobre</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-12">
+                            <ul class="social-list">
+                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
+                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
+                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
+                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-youtube-play" href="#"></a></li>
+                                <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-
-      <!-- Page Footer-->
-      <footer class="section footer-minimal context-dark">
-        <div class="container wow-outer">
-          <div class="wow fadeIn">
-            <div class="row row-60">
-              <div class="col-12"></div>
-              <div class="col-12">
-                <ul class="footer-minimal-nav">
-                  <li><a href="#">Menu</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="contacts.html">Contatos</a></li>
-                  <li><a href="#">Galeria</a></li>
-                  <li><a href="about-us.html">Sobre</a></li>
-                </ul>
-              </div>
-              <div class="col-12">
-                <ul class="social-list">
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-facebook" href="#"></a></li>
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-instagram" href="#"></a></li>
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-twitter" href="#"></a></li>
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-youtube-play" href="#"></a></li>
-                  <li><a class="icon icon-sm icon-circle icon-circle-md icon-bg-white fa-pinterest-p" href="#"></a></li>
-                </ul>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-      </footer>
+        </footer>
     </div>
     <div class="snackbars" id="form-output-global"></div>
     <script src="js/core.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/h.js"></script>
-  </body>
+</body>
 </html>

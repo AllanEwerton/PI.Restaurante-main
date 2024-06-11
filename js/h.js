@@ -1,30 +1,26 @@
-document.addEventListener("htmx:afterRequest", function(event){
+document.addEventListener("DOMContentLoaded", function() {
+    const menuList = document.querySelector("#menuList");
 
-    if(event.target.id === 'searchInput'){
-        console.log(event.detail.xhr);
-    
-        const response = JSON.parse(event.detail.xhr.responseText)
-        const produtosDiv = document.querySelector("#menuList");
-    
-        let htmlDiv = "";
-        let preco = 0;
-    
-        response.menu.pratos_principais.forEach(produto => {
+    fetch("http://localhost:3000/Menu")
+        .then(response => response.json())
+        .then(data => {
+            let menuItemsHTML = "";
+            data.menu.pratos_principais.forEach(prato => {
+                const preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(prato.preco);
+                menuItemsHTML += `
+                    <div class="prato">
+                        <img src="${prato.url}" alt="${prato.nome}" class="prato-imagem">
+                        <div class="prato-info">
+                            <h4>${prato.nome}</h4>
+                            <p>${prato.descricao}
+                            </p>
+                            <p class="preco">Preço: ${preco}</p>
 
-            
-            preco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(produto.price);
-            
-            htmlDiv += `
-                1\aq
-             <li>${produto.id}</li>
-            
-             <li>${preco}</li>
-
-            `
-            indice++
+                        </div>
+                    </div>
+                `;
+            });
+            menuList.innerHTML = menuItemsHTML;
         })
-    
-        produtosDiv.innerHTML = htmlDiv
-    }
-    
-    });
+        .catch(error => console.error('Erro ao carregar o menu:', error));
+});

@@ -3,20 +3,26 @@ document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.querySelector("#searchInput");
     const searchButton = document.querySelector("#searchButton");
     const searchForm = document.querySelector("#searchForm");
+    const noResults = document.querySelector("#noResults");
 
     // Função para filtrar os pratos com base no texto digitado
     function filtrarPratos(texto) {
         const pratos = menuList.querySelectorAll(".prato");
         const filtro = texto.toLowerCase();
+        let pratosEncontrados = false;
 
         pratos.forEach(prato => {
             const nomePrato = prato.querySelector("h4").textContent.toLowerCase();
             if (nomePrato.includes(filtro)) {
                 prato.style.display = "block"; // Mostra o prato
+                pratosEncontrados = true;
             } else {
                 prato.style.display = "none"; // Esconde o prato que não corresponde ao filtro
             }
         });
+
+        // Exibe ou esconde o aviso de "Nenhum prato encontrado"
+        noResults.style.display = pratosEncontrados ? "none" : "block";
     }
 
     // Evento de clique no botão de pesquisa

@@ -137,6 +137,20 @@
     background-color: green; /* Cor de fundo do botão ao passar o mouse */
     border-color: rgb(24, 63, 24); /* Cor da borda do botão ao passar o mouse */
 }
+#noResults {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    color: #fff; /* Cor do texto */
+    background-color: #dc3545; /* Cor de fundo (vermelho suave) */
+    padding: 15px; /* Espaçamento interno */
+    border-radius: 8px; /* Bordas arredondadas */
+    margin: 20px auto; /* Espaçamento superior e inferior, centralizado horizontalmente */
+    width: 80%; /* Largura */
+    max-width: 500px; /* Largura máxima */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
 
     </style>
 </head>
@@ -222,11 +236,16 @@
             </form>
             
             
-          </nav>
+        </nav>
 
         <section id="menuList" class="prato-lista" hx-trigger="load" hx-get="http://localhost:3000/Menu">
             <!-- Os itens do menu serão adicionados aqui via HTMX -->
         </section>
+        <div id="noResults" >
+            Nenhum prato encontrado.
+        </div>
+        
+        
         
         </div>
         <!-- Page Footer-->
